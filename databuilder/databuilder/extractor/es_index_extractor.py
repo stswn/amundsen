@@ -33,10 +33,9 @@ class ElasticsearchIndexExtractor(ElasticsearchBaseExtractor):
             try:
                 # Elasticsearch supports single document type per index but this type can have any arbitrary name.
                 doc_type = list(mappings.keys())[0]
+                properties = mappings.get(doc_type, dict()).get('properties', dict()) or dict()
             except IndexError:
-                continue
-
-            properties = mappings.get(doc_type, dict()).get('properties', dict()) or dict()
+                properties = dict()
 
             columns = []
 
