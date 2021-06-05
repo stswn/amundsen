@@ -16,11 +16,9 @@ class ElasticsearchIndexExtractor(ElasticsearchBaseExtractor):
     def get_scope(self) -> str:
         return 'extractor.es_indexes'
 
-    def _render_programmatic_description(self, input: Optional[Dict]) -> str:
+    def _render_programmatic_description(self, input: Optional[Dict]) -> Optional[str]:
         if input:
             result = f"""```\n{json.dumps(input, indent=2)}\n```"""
-
-            print(result)
 
             return result
         else:
