@@ -143,6 +143,10 @@ const configDefault: AppConfig = {
           displayName: 'Snowflake',
           iconClass: 'icon-snowflake',
         },
+        elasticsearch: {
+          displayName: 'Elasticsearch',
+          iconClass: 'icon-elasticsearch',
+        },
       },
       filterCategories: [
         {
