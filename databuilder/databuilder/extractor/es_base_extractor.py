@@ -1,16 +1,16 @@
 # Copyright Contributors to the Amundsen project.
 # SPDX-License-Identifier: Apache-2.0
 import abc
+
+from pyhocon import ConfigTree
 from typing import (
     Any, Dict, Iterator, Optional, Union,
 )
 
-from pyhocon import ConfigTree
-
-from databuilder.extractor.generic_extractor import GenericExtractor
+from databuilder.extractor.base_extractor import Extractor
 
 
-class ElasticsearchBaseExtractor(GenericExtractor):
+class ElasticsearchBaseExtractor(Extractor):
     """
     Extractor to extract index metadata from Elasticsearch
     """
