@@ -1,9 +1,11 @@
 # Copyright Contributors to the Amundsen project.
 # SPDX-License-Identifier: Apache-2.0
 import abc
+from typing import (
+    Any, Dict, Iterator, Optional, Union,
+)
 
 from pyhocon import ConfigTree
-from typing import Any, Dict, Iterator, Union
 
 from databuilder.extractor.generic_extractor import GenericExtractor
 
@@ -16,7 +18,6 @@ class ElasticsearchBaseExtractor(GenericExtractor):
     ELASTICSEARCH_CLIENT_CONFIG_KEY = 'client'
     ELASTICSEARCH_EXTRACT_TECHNICAL_DETAILS = 'extract_technical_details'
 
-    PRODUCT = 'product'
     CLUSTER = 'cluster'
     SCHEMA = 'schema'
 
@@ -42,6 +43,16 @@ class ElasticsearchBaseExtractor(GenericExtractor):
             pass
 
         return result
+
+    def _get_index_mapping_properties(self, index: Dict) -> Optional[Dict]:
+        mappings = index.get('mappings', dict())
+
+        try:
+            properties = list(mappings.values())[0].get('properties', dict())
+        except Exception:
+            properties = dict()
+
+        return properties
 
     def extract(self) -> Any:
         try:

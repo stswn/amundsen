@@ -1,11 +1,12 @@
 # Copyright Contributors to the Amundsen project.
 # SPDX-License-Identifier: Apache-2.0
 import json
-
-from typing import Dict, Iterator, Union, Optional
+from typing import (
+    Dict, Iterator, Optional, Union,
+)
 
 from databuilder.extractor.es_base_extractor import ElasticsearchBaseExtractor
-from databuilder.models.table_metadata import TableMetadata, ColumnMetadata
+from databuilder.models.table_metadata import ColumnMetadata, TableMetadata
 
 
 class ElasticsearchIndexExtractor(ElasticsearchBaseExtractor):
@@ -28,14 +29,7 @@ class ElasticsearchIndexExtractor(ElasticsearchBaseExtractor):
         indexes: Dict = self._get_indexes()
 
         for index_name, index_metadata in indexes.items():
-            mappings = index_metadata.get('mappings', dict())
-
-            try:
-                # Elasticsearch supports single document type per index but this type can have any arbitrary name.
-                doc_type = list(mappings.keys())[0]
-                properties = mappings.get(doc_type, dict()).get('properties', dict()) or dict()
-            except IndexError:
-                properties = dict()
+            properties = self._get_index_mapping_properties(index_metadata) or dict()
 
             columns = []
 

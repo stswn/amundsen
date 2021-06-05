@@ -2,7 +2,9 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
-from typing import Dict, Iterator, Union, List, Any, Set
+from typing import (
+    Any, Dict, Iterator, List, Set, Union,
+)
 
 from databuilder.extractor.es_base_extractor import ElasticsearchBaseExtractor
 from databuilder.models.table_stats import TableColumnStats
@@ -67,11 +69,7 @@ class ElasticsearchColumnStatsExtractor(ElasticsearchBaseExtractor):
     def _get_extract_iter(self) -> Iterator[Union[TableColumnStats, None]]:
         indexes: Dict = self._get_indexes()
         for index_name, index_metadata in indexes.items():
-            mappings = index_metadata.get('mappings', dict())
-
-            doc_type = list(mappings.keys())[0] if mappings else '-1'
-
-            properties = mappings.get(doc_type, dict()).get('properties', dict()) or dict()
+            properties = self._get_index_mapping_properties(index_metadata) or dict()
 
             fields = [name for name, spec in properties.items() if spec['type'] in self._allowed_types]
 
