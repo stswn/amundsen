@@ -14,6 +14,7 @@ class ElasticsearchBaseExtractor(GenericExtractor):
     """
 
     ELASTICSEARCH_CLIENT_CONFIG_KEY = 'client'
+    ELASTICSEARCH_EXTRACT_TECHNICAL_DETAILS = 'extract_technical_details'
 
     PRODUCT = 'product'
     CLUSTER = 'cluster'
@@ -61,6 +62,13 @@ class ElasticsearchBaseExtractor(GenericExtractor):
     @property
     def schema(self) -> str:
         return self.conf.get(ElasticsearchBaseExtractor.SCHEMA)
+
+    @property
+    def _extract_technical_details(self) -> bool:
+        try:
+            return self.conf.get(ElasticsearchBaseExtractor.ELASTICSEARCH_EXTRACT_TECHNICAL_DETAILS)
+        except Exception:
+            return False
 
     @abc.abstractmethod
     def _get_extract_iter(self) -> Iterator[Union[Any, None]]:
