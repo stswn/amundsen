@@ -9,13 +9,13 @@ from databuilder.extractor.es_base_extractor import ElasticsearchBaseExtractor
 from databuilder.models.table_metadata import ColumnMetadata, TableMetadata
 
 
-class ElasticsearchIndexExtractor(ElasticsearchBaseExtractor):
+class ElasticsearchMetadataExtractor(ElasticsearchBaseExtractor):
     """
     Extractor to extract index metadata from Elasticsearch
     """
 
     def get_scope(self) -> str:
-        return 'extractor.es_indexes'
+        return 'extractor.es_metadata'
 
     def _render_programmatic_description(self, input: Optional[Dict]) -> Optional[str]:
         if input:

@@ -6,7 +6,7 @@ from mock import MagicMock
 from pyhocon import ConfigFactory
 
 from databuilder import Scoped
-from databuilder.extractor.es_index_extractor import ElasticsearchIndexExtractor
+from databuilder.extractor.es_metadata_extractor import ElasticsearchMetadataExtractor
 from databuilder.models.table_metadata import ColumnMetadata, TableMetadata
 
 
@@ -55,16 +55,16 @@ class TestElasticsearchIndexExtractor(unittest.TestCase):
     }
 
     def setUp(self) -> None:
-        params = {'extractor.es_indexes.schema': 'schema_name',
-                  'extractor.es_indexes.cluster': 'cluster_name',
-                  'extractor.es_indexes.client': Elasticsearch()}
+        params = {'extractor.es_metadata.schema': 'schema_name',
+                  'extractor.es_metadata.cluster': 'cluster_name',
+                  'extractor.es_metadata.client': Elasticsearch()}
 
         config = ConfigFactory.from_dict(params)
 
         self.config = config
 
     def _get_extractor(self) -> Any:
-        extractor = ElasticsearchIndexExtractor()
+        extractor = ElasticsearchMetadataExtractor()
         extractor.init(Scoped.get_scoped_conf(conf=self.config, scope=extractor.get_scope()))
 
         return extractor
