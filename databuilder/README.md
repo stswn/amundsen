@@ -1356,7 +1356,7 @@ from databuilder.job.job import DefaultJob
 from databuilder.loader.file_system_neo4j_csv_loader import FsNeo4jCSVLoader
 from databuilder.task.task import DefaultTask
 
-tmp_folder = '/tmp/es_metadata'
+tmp_folder = '/tmp/es_column_stats'
 
 node_files_folder = f'{tmp_folder}/nodes'
 relationship_files_folder = f'{tmp_folder}/relationships'
