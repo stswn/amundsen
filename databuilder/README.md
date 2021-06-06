@@ -1272,7 +1272,7 @@ job.launch()
 
 ### [ElasticsearchMetadataExtractor](./databuilder/extractor/es_metadata_extractor.py)
 
-The included `ElasticsearchMetadataExtractor` provides support for extracting basic metadata for Apache Superset dashboards.
+The included `ElasticsearchMetadataExtractor` provides support for extracting basic metadata for Elasticsearch indexes.
 
 It extracts index metadata into `TableMetadata` model so the results are retrievable the same way as table metadata.
 
@@ -1327,7 +1327,7 @@ job = DefaultJob(conf=job_config,
 
 ### [ElasticsearchColumnStatsExtractor](./databuilder/extractor/es_column_stats_extractor.py)
 
-The included `ElasticsearchColumnStatsExtractor` provides support for extracting basic statistics on numerical properties of Elasticsearch indices.
+The included `ElasticsearchColumnStatsExtractor` provides support for extracting basic statistics on numerical properties of Elasticsearch indexes.
 
 It extracts statistics using [Elasticsearch aggregation `matrix_stats`](https://www.elastic.co/guide/en/elasticsearch/reference/master/search-aggregations-matrix-stats-aggregation.html). It disregards statistics named `covariance` and `correlation`.
 
